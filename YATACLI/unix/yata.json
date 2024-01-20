@@ -1,0 +1,100 @@
+ast.literal_eval()
+
+For example configuration:
+
+[section]
+option=["item1","item2","item3"]
+
+The code is:
+
+import ConfigParser
+import ast
+
+my_list = ast.literal_eval(config.get("section", "option"))
+print(type(my_list))
+print(my_list)
+
+output:
+
+<type'list'>
+["item1","item2","item3"]
+
+
+
+{ "YATA": {
+   "title": "YATASetup",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    "ID": "SGML",
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": "ISO 8879:1986",
+					"GlossDef": {
+                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
+						"GlossSeeAlso": ["GML", "XML"]
+                    },
+					"GlossSee": "markup"
+                }
+            }
+        }
+    }
+}
+
+[info]
+sudo=jgg
+
+[keys]
+server1=keyserver.ubuntu.com
+key1=E298A3A825C0D65DFD57CBB651716619E084DAB9
+# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+
+[repos]
+repo1="deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/"
+# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+# sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
+
+[linux]
+apt="net-tools                  \
+     git                        \
+     dirmngr                    \
+     gnupg                      \
+     apt-transport-https        \
+     ca-certificates            \
+     nginx                      \
+     software-properties-common"
+     
+get="libxml2-dev                \
+     libfontconfig1-dev         \
+     libudunits2-dev            \
+     libssl-dev                 \
+     libcurl4-openssl-dev       \
+     libxt-dev libcairo2-dev    \
+     libharfbuzz-dev            \
+     libfribidi-dev             \
+     libfreetype6-dev           \
+     libpng-dev                 \
+     libtiff5-dev               \
+     libjpeg-dev                \
+     libmariadb-dev-compat      \    
+     openssl                    \     
+     gdebi-core                 \
+     wget                       "
+
+[R]
+url=https://download3.rstudio.org/ubuntu-14.04/x86_64/
+shiny=shiny-server-1.5.17.973-amd64.deb  
+
+[yata]
+base=/srv
+git=https://github.com/Grandez/YATA2.git
+packages="Tools  DB  Providers  DT  Core REST WebCore"
+
+
+#global_library
+#user_library
+#library
+
+# SciViewsPackages <- c("SciViews", "svMisc", "svSocket", "svGUI", "svIDE", "svKomodo", "svDialogs", "svSweave", "svTools", "svUnit", "svWidgets", "tcltk2") install.packages(SciViewsPackages)

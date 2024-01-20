@@ -1,0 +1,8 @@
+# Script to launch batch processes
+
+while true ; do
+  Rscript --default-packages="YATABatch" -e "YATABatch::update_history()" 
+  rc=$?
+  if [ $rc -lt 8 ] ; then exit $rc ; done
+  sleep 1800
+done

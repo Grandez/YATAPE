@@ -1,0 +1,61 @@
+function exec_apt {
+    echo "Parametros son " $#
+    echo "" > $LOGFILE
+    CMD="apt-get"
+    if [[ $1 -eq 0 ]] ; then CMD="apt" ; fi
+   INC=$(( 100 * $# / 100 ))
+   DONE=0
+   echo "DONE Hecho"
+   for pkg in $@ ; do
+       if [[ $DONE -gt 0 ]] ; then
+          echo "Instalando " $pkg " - " $DONE # >> $LOGFILE && echo -e $DONE && sleep 1
+          $CMD -y install  $pkg
+          rc=$?
+          if [[ $rc -gt 0 ]] ; then error "Instalando " $pkg ; fi
+       fi
+       DONE=$(( $DONE + $INC ))
+   done 
+#   | dialog --begin 7 5  --no-shadow --title "Log" --tailboxbg $LOGFILE 25 130 \
+#              --and-widget \
+#              --begin 1 5 --no-shadow --title "Progress" --gauge "" 5 130 0   
+#
+   
+}
+function add_keys {
+  msg adding keys
+  cfg_keys
+  VAR_SFX=1
+  SRV=$(seq_var_value server $VAR_SFX)
+  while [ -n "$SRV" ] ; do
+     KEY=$(seq_var_value key $VAR_SFX)
+     VAR_SFX=$(( $VAR_SFX + 1 ))
+     apt-key adv --keyserver $SRV --recv-keys $KEY
+     SRV=$(seq_var_value server $VAR_SFX)
+  done
+}
+function add_repos {
+   msg adding repos
+   cfg_repos
+   VAR_SFX=1
+   REP=$(seq_var_value repo $VAR_SFX)
+
+   while [ -n "$REP" ] ; do
+      msg adding repo ${REP[@]}
+      echo "antes del sudo"
+      add-apt-repository \'${REP[@]}\'
+      VAR_SFX=$(( $VAR_SFX + 1 ))
+      REP=$(seq_var_value repo $VAR_SFX)
+   done
+    
+}
+function add_packages {
+    msg Adding packages
+    cfg_linux
+    exec_apt 0 $apt
+    exec_apt 1 $get      
+}
+function init_linux {
+    add_keys
+    add_repos
+    add_packages
+}

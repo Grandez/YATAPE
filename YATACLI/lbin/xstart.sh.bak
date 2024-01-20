@@ -1,0 +1,19 @@
+# Script to launch batch processes
+
+showHelp () {
+    
+}
+if [ $# -eq 0 ] ; then
+    echo "Missing process to start"
+    echo "Use $0 --help"
+    exit 12
+fi
+
+if [ "$1" == "-h" ]     ; then showHelp ; fi
+if [ "$1" == "--help" ] ; then showHelp ; fi
+    
+# Retrieve Currencies from CoinMarketCap
+# Author: Grandez
+#
+Rscript --default-packages="YATABatch" -e "YATABatch::updateCurrencies()"
+
