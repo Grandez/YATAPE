@@ -1,0 +1,40 @@
+openapi: 3.0.1
+info:
+  title: YATA REST Server
+  description: Servidor para hacer peticiones asincronas
+  version: '1.0'
+servers:
+  - url: /
+paths:
+  /alive:
+     get:
+        description: Chequea que el servidor esta activo
+        responses:
+            200:
+               description: Esta activo
+  /best:
+      summary: Obtiene las criptomonedas de mayor rentabilidad
+      parameters:
+         - top: "top"
+           description: Numero de criptomonedas maximo a devolver
+           required: true
+           in: query
+           schema:
+              type: integer
+           example: 10
+         - from: "from"
+           description: Intervalo para considerar la variacion
+           required: true
+           in: query
+           schema:
+              type: integer
+              enum: [1, 7, 24,30]
+           example: 7
+
+      responses:
+        200:
+          description: API response
+          content:
+            application/json:
+        400:
+          description: Bad Request

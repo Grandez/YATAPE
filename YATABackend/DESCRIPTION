@@ -1,0 +1,12 @@
+Package: YATABackend
+Type: Package
+Title: YATA Backend
+Version: 0.1.0
+Author: Grandez
+Maintainer: Grandez <jggrandez@gmail.com>
+Description: Backend for YATA
+    Provides REST services for clients
+License: use_mit_license()
+Encoding: UTF-8
+LazyData: true
+Imports: JGGRest, tools
