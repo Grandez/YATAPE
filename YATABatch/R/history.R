@@ -3,16 +3,18 @@
 #'
 #' JGG Limitamos los datos a 150 monedas
 #'
-update_history = function(reverse = FALSE, logLevel = 255, logOutput = 2) {
+update_history = function(reverse = FALSE, logLevel = 255, logOutput = 3) {
+   browser()
+   module = "history"
    factory = NULL
-   batch   <<- YATABatch$new("history", logLevel, logOutput)
-   batch$setCounters(c( input     ="Monedas leidas"
-                       ,processed = "Monedas procesadas"))
+   batch   <<- YATABatch$new(module, logLevel, logOutput)
+   # batch$setCounters(c( input     ="Monedas leidas"
+   #                     ,processed = "Monedas procesadas"))
    logger = batch$logger
-   items  = 0
+   # items  = 0
 
    if (batch$running) {
-      logger$running()
+      logger$warn(paste("Process", module, "already running"))
       return (invisible(batch$rc$RUNNING))
    }
 
@@ -21,7 +23,10 @@ update_history = function(reverse = FALSE, logLevel = 255, logOutput = 2) {
 
       tblctc = factory$getTable("Currencies")
       dfctc  = tblctc$table(active = 1)
-      if (nrow(dfctc) == 0) return (batch$rc$NODATA)
+      if (nrow(dfctc) == 0) {
+          logger$warn(paste("No hay monedas para procesar"))
+          return (invisible(batch$rc$NODATA))
+      }
 
       df = dfctc[order(dfctc$rank),]
       df = df[1:150,]

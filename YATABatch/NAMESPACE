@@ -1,6 +1,7 @@
 import(dplyr)
 import(YATATools)
 import(YATAProviders)
+import(sdpr)
 
 # exported names are all snake case to simplify typing
 exportPattern("^update_*")
