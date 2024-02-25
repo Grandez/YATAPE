@@ -1,0 +1,17 @@
+Package: YATATools
+Type: Package
+Title: Common utilities and errors management
+Version: 0.1.0
+Author: Grandez
+Maintainer: Grandez <jggrandez@gmail.com>
+Description: No tiene mas depdendencias que las basicas
+    Usado por todos
+License: use_apache_license()
+Encoding: UTF-8
+LazyData: true
+Depends: R  (>= 4.0.4)
+        ,R6 (>= 2.5.0)
+        ,tools
+        ,hash
+        ,stringr
+        ,rlist

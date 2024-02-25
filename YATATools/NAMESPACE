@@ -1,0 +1,11 @@
+import(R6)
+import(hash)
+import(stringr)
+import(crayon)
+import(httr)
+import(jsonlite)
+import(ps)
+
+# All functions are exported
+# Hiden functions should prefixed with dot
+exportPattern("^[[:alpha:]]+")
