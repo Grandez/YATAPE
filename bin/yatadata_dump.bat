@@ -1,0 +1,3 @@
+@echo off
+echo Dumping YATAData ...
+mariadb-dump -u YATA -pyata YATAData | c:\tools\gzip > P:\R\YATAPE\docker\yatadata\999_yatadata.sql.gz
